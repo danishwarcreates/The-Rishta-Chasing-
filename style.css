@@ -32,3 +32,77 @@ button:active{transform:translateY(3px);box-shadow:0 4px 0 #b83d6a}
 .achievement-card{max-width:620px}.achievement-row{text-align:left;padding:10px 12px;border-radius:12px;background:#f5edf2;margin:6px 0}.achievement-row.locked{opacity:.45}
 @media(orientation:portrait){#game,#hud,#jumpBtn{filter:blur(2px)}}
 @media(max-height:420px){.card{padding:15px;max-width:430px}.home-card .hero-mini{height:72px;margin:8px 0}.card button{padding:10px}.tagline{display:none}}
+/* =========================
+   PASSWORD LOCK SCREEN
+========================= */
+
+#lockScreen{
+  z-index:9999;
+  background:linear-gradient(
+    135deg,
+    rgba(255,220,232,.98),
+    rgba(255,240,246,.98)
+  );
+}
+
+.lock-card{
+  text-align:center;
+  max-width:420px;
+  padding:35px 28px;
+}
+
+.lock-icon{
+  font-size:55px;
+  margin-bottom:14px;
+  animation:lockFloat 2s ease-in-out infinite;
+}
+
+.lock-card h1{
+  color:#d94f86;
+  font-size:clamp(26px,5vw,38px);
+}
+
+.lock-card p{
+  line-height:1.6;
+  margin:10px 0 22px;
+}
+
+#passwordInput{
+  width:100%;
+  padding:15px 18px;
+  border-radius:14px;
+  border:2px solid #f3a6c1;
+  background:#fff;
+  color:#333;
+  font-size:16px;
+  text-align:center;
+  outline:none;
+  margin-bottom:12px;
+  font-family:inherit;
+}
+
+#passwordInput:focus{
+  border-color:#e85b8f;
+  box-shadow:0 0 0 4px rgba(232,91,143,.12);
+}
+
+#unlockBtn{
+  margin-top:4px;
+}
+
+.password-error{
+  color:#d83b6a!important;
+  font-weight:700;
+  min-height:22px;
+  margin:12px 0 0!important;
+}
+
+@keyframes lockFloat{
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
+}
