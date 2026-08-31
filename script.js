@@ -1,6 +1,5 @@
 (() => {
 "use strict";
-}
 const canvas=document.getElementById("game"),ctx=canvas.getContext("2d");
 const $=id=>document.getElementById(id);
 const ui={orientation:$("orientation"),home:$("home"),settings:$("settings"),achievements:$("achievements"),pause:$("pause"),gameover:$("gameover"),hud:$("hud"),jump:$("jumpBtn"),dialogue:$("dialogue"),toast:$("toast")};
@@ -273,7 +272,6 @@ $("musicBtn").textContent=`🎵 MUSIC: ${musicOn?"ON":"OFF"}`;
 $("soundBtn").textContent=`🔊 SOUND: ${soundOn?"ON":"OFF"}`;
 
 setScreen(landscape()?"home":"orientation");
-
 setInterval(()=>{
   if(running&&!landscape())updateOrientation()
 },400);
