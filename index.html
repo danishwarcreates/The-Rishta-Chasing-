@@ -4,23 +4,62 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
   <meta name="theme-color" content="#f8dce8">
-  <title>RUN AWAY 💗 — The Rishta Chase</title>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JR3E5BWLW2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-JR3E5BWLW2');
-</script>
+  <title>RUN AWAY 💗 — The Rishta Chase</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JR3E5BWLW2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JR3E5BWLW2');
+  </script>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <main id="app">
+
+    <!-- =========================
+         PASSWORD LOCK SCREEN
+    ========================== -->
+    <section id="lockScreen" class="overlay">
+      <div class="card lock-card">
+
+        <div class="lock-icon">🔐💗</div>
+
+        <h1>For Someone Special</h1>
+
+        <p>
+          This little game has been made especially for you.<br>
+          Enter the secret password to unlock it ✨
+        </p>
+
+        <input
+          type="password"
+          id="passwordInput"
+          placeholder="Enter password"
+          autocomplete="off"
+        >
+
+        <button id="unlockBtn">UNLOCK 💍</button>
+
+        <p id="passwordError" class="password-error"></p>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         GAME CANVAS
+    ========================== -->
     <canvas id="game" aria-label="Run Away game"></canvas>
 
-    <section id="orientation" class="overlay">
+
+    <!-- ORIENTATION SCREEN -->
+    <section id="orientation" class="overlay hidden">
       <div class="card orientation-card">
         <div class="big-icon">📱</div>
         <h1>Turn your phone sideways</h1>
@@ -29,77 +68,144 @@
       </div>
     </section>
 
+
+    <!-- HOME SCREEN -->
     <section id="home" class="overlay hidden">
       <div class="card home-card">
-        <div class="logo">RUN AWAY <span>💗</span></div>
-        <div class="subtitle">THE RISHTA CHASE <span>💍</span></div>
-        <div class="hero-mini">
-          <div class="hero-runner"></div><div class="hero-rishta">💍</div>
+
+        <div class="logo">
+          RUN AWAY <span>💗</span>
         </div>
-        <p class="tagline">She runs. He proposes. You jump.</p>
+
+        <div class="subtitle">
+          THE RISHTA CHASE <span>💍</span>
+        </div>
+
+        <div class="hero-mini">
+          <div class="hero-runner"></div>
+          <div class="hero-rishta">💍</div>
+        </div>
+
+        <p class="tagline">
+          She runs. He proposes. You jump.
+        </p>
+
         <div class="home-buttons">
           <button id="startBtn">▶ START</button>
           <button id="bestBtn">🏆 BEST SCORE</button>
           <button id="settingsBtn">⚙ SETTINGS</button>
         </div>
+
         <div id="bestText" class="best-text"></div>
+
       </div>
     </section>
 
+
+    <!-- SETTINGS -->
     <section id="settings" class="overlay hidden">
       <div class="card">
+
         <h2>SETTINGS</h2>
+
         <button id="musicBtn">🎵 MUSIC: ON</button>
         <button id="soundBtn">🔊 SOUND: ON</button>
         <button id="achBtn">🏆 ACHIEVEMENTS</button>
+
         <button id="closeSettings">BACK</button>
+
       </div>
     </section>
 
+
+    <!-- ACHIEVEMENTS -->
     <section id="achievements" class="overlay hidden">
       <div class="card achievement-card">
+
         <h2>ACHIEVEMENTS</h2>
+
         <div id="achievementList"></div>
+
         <button id="closeAchievements">BACK</button>
+
       </div>
     </section>
 
+
+    <!-- PAUSE -->
     <section id="pause" class="overlay hidden">
       <div class="card">
+
         <h2>PAUSED</h2>
+
         <button id="resumeBtn">RESUME</button>
         <button id="restartPauseBtn">RESTART</button>
         <button id="homePauseBtn">HOME</button>
+
       </div>
     </section>
 
+
+    <!-- GAME OVER -->
     <section id="gameover" class="overlay hidden">
       <div class="card gameover-card">
-        <div id="collisionMessage" class="collision-message hidden">💍🎉 SHAADI MUBARAK HO! 🎉💍</div>
+
+        <div id="collisionMessage" class="collision-message hidden">
+          💍🎉 SHAADI MUBARAK HO! 🎉💍
+        </div>
+
         <h2 id="gameoverTitle">GAME OVER</h2>
-        <div class="final-score">DISTANCE <strong id="finalDistance">0m</strong></div>
-        <div class="final-score">SCORE <strong id="finalScore">0</strong></div>
-        <div id="newBest" class="new-best hidden">NEW BEST! 🏆</div>
+
+        <div class="final-score">
+          DISTANCE
+          <strong id="finalDistance">0m</strong>
+        </div>
+
+        <div class="final-score">
+          SCORE
+          <strong id="finalScore">0</strong>
+        </div>
+
+        <div id="newBest" class="new-best hidden">
+          NEW BEST! 🏆
+        </div>
+
         <button id="restartBtn">TRY AGAIN</button>
         <button id="homeBtn">HOME</button>
+
       </div>
     </section>
 
+
+    <!-- HUD -->
     <div id="hud" class="hidden">
+
       <div class="hud-left">
         <div id="distanceHud">000000m</div>
         <div id="livesHud">❤️❤️❤️</div>
       </div>
+
       <div class="hud-center" id="dialogue"></div>
+
       <div class="hud-right">
         <div id="coinHud">🧪 0</div>
         <button id="pauseBtn" class="icon-btn">Ⅱ</button>
       </div>
+
     </div>
 
-    <button id="jumpBtn" class="jump-btn hidden">JUMP</button>
+
+    <!-- JUMP BUTTON -->
+    <button id="jumpBtn" class="jump-btn hidden">
+      JUMP
+    </button>
+
+
+    <!-- TOAST -->
     <div id="toast"></div>
+
   </main>
+
   <script src="script.js"></script>
 </body>
 </html>
