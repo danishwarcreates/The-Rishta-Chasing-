@@ -1,5 +1,50 @@
 (() => {
 "use strict";
+  const GAME_PASSWORD = "01032000";
+const PASSWORD_SESSION_KEY = "raw_unlocked";
+
+const passwordScreen = document.getElementById("passwordScreen");
+const passwordInput = document.getElementById("passwordInput");
+const passwordSubmit = document.getElementById("passwordSubmit");
+const passwordError = document.getElementById("passwordError");
+
+function unlockGame() {
+  if (passwordScreen) passwordScreen.classList.add("hidden");
+}
+
+function checkPassword() {
+  if (!passwordInput) return;
+
+  if (passwordInput.value === GAME_PASSWORD) {
+    sessionStorage.setItem(PASSWORD_SESSION_KEY, "1");
+    passwordError.textContent = "";
+    unlockGame();
+  } else {
+    passwordError.textContent = "Incorrect password 💔";
+    passwordInput.value = "";
+    passwordInput.focus();
+
+    if (passwordScreen) {
+      passwordScreen.classList.remove("shake");
+      void passwordScreen.offsetWidth;
+      passwordScreen.classList.add("shake");
+    }
+  }
+}
+
+if (passwordSubmit) {
+  passwordSubmit.addEventListener("click", checkPassword);
+}
+
+if (passwordInput) {
+  passwordInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") checkPassword();
+  });
+}
+
+if (sessionStorage.getItem(PASSWORD_SESSION_KEY) === "1") {
+  unlockGame();
+}
 const canvas=document.getElementById("game"),ctx=canvas.getContext("2d");
 const $=id=>document.getElementById(id);
 const ui={orientation:$("orientation"),home:$("home"),settings:$("settings"),achievements:$("achievements"),pause:$("pause"),gameover:$("gameover"),hud:$("hud"),jump:$("jumpBtn"),dialogue:$("dialogue"),toast:$("toast")};
@@ -267,6 +312,18 @@ $("musicBtn").onclick=()=>{musicOn=!musicOn;localStorage.setItem("raw_music",mus
 $("soundBtn").onclick=()=>{soundOn=!soundOn;localStorage.setItem("raw_sound",soundOn?"1":"0");$("soundBtn").textContent=`🔊 SOUND: ${soundOn?"ON":"OFF"}`};
 $("achBtn").onclick=()=>{renderAchievements();setScreen("ach")};$("closeAchievements").onclick=()=>setScreen("settings");$("bestBtn").onclick=()=>toast(`Best score: ${String(best).padStart(6,"0")}`);
 updateBestText();$("musicBtn").textContent=`🎵 MUSIC: ${musicOn?"ON":"OFF"}`;$("soundBtn").textContent=`🔊 SOUND: ${soundOn?"ON":"OFF"}`;
-setScreen(landscape()?"home":"orientation");
-setInterval(()=>{if(running&&!landscape())updateOrientation()},400);
+updateBestText();
+$("musicBtn").textContent=`🎵 MUSIC: ${musicOn?"ON":"OFF"}`;
+$("soundBtn").textContent=`🔊 SOUND: ${soundOn?"ON":"OFF"}`;
+
+if (sessionStorage.getItem(PASSWORD_SESSION_KEY) === "1") {
+  setScreen(landscape() ? "home" : "orientation");
+} else {
+  [ui.orientation, ui.home, ui.settings, ui.achievements, ui.pause, ui.gameover].forEach(hide);
+}
+
+setInterval(()=>{
+  if(running&&!landscape())updateOrientation()
+},400);
+
 })();
